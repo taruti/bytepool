@@ -39,7 +39,7 @@ func Free(bs []byte) {
 const npools = 20
 
 // MaxSize is the supported maximum size
-const MaxSize = 1 << 24
+const MaxSize = 1 << 23
 
 var pools = [npools]sync.Pool{}
 var sizes = [npools]int32{
@@ -59,10 +59,10 @@ var sizes = [npools]int32{
 	1 << 17,
 	1 << 18,
 	1 << 19,
+	1 << 20,
 	1 << 21,
 	1 << 22,
 	1 << 23,
-	1 << 24,
 }
 
 func init() {
