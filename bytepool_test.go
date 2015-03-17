@@ -27,6 +27,15 @@ func TestBytepool(t *testing.T) {
 		}
 		Free(bs)
 	}
+	bs := Alloc(MaxSize)
+	if bs == nil {
+		t.Fatal("Cannot alloc MaxSize")
+	}
+	Free(bs)
+	bs = Alloc(MaxSize + 1)
+	if bs != nil {
+		t.Fatal("Too large alloc - should not be possible")
+	}
 }
 
 func BenchmarkAlloc256R(b *testing.B) {

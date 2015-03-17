@@ -10,14 +10,13 @@ import (
 // nearest power of two and truncated to the size supplied. This function may be
 // called concurrently.
 func Alloc(size int) []byte {
-	if size > MaxSize {
-		return nil
-	}
-	sz := int32(size)
-	for i, v := range sizes {
-		if sz <= v {
-			bs := pools[i].Get().([]byte)
-			return bs[0:size]
+	if size <= MaxSize {
+		sz := int32(size)
+		for i, v := range sizes {
+			if sz <= v {
+				bs := pools[i].Get().([]byte)
+				return bs[0:size]
+			}
 		}
 	}
 	return nil
